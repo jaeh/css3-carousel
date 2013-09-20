@@ -1,0 +1,13 @@
+containerSelector: 'carouselContainer',
+  paneSelector: 'pane',
+  height: '250',
+  heightUnit: 'percent',
+  width: '400',
+  widthUnit: 'percent',
+  numOfPanes: '4',
+  imageBaseurl: '/img/test/',
+  imageUrl1: 'image1.png',
+  imageUrl2: 'image2.png',
+  imageUrl3: 'image3.png',
+  jade: 'on',
+  stylus: 'on'

@@ -1,0 +1,12 @@
+div(id=wrapperSelector)
+  div(id=containerSelector)
+    - for panel, i in panels
+      div(id= paneSelector + "-" + i, class= paneSelector)
+        div.container
+          if panel.title
+            h1= panel.title
+          if panel.content
+            div !{panel.content}
+          
+        if panel.imageSrc
+          img(src=imageBaseurl + panel.imageSrc)

@@ -1,0 +1,55 @@
+#{wrapperSelector}
+  height height
+  width width
+  display inline-block
+  overflow hidden
+  position relative
+
+#{containerSelector}
+  height 100%
+  width containerWidth
+  position relative
+  left 0
+
+.{paneSelector}
+  height 100%
+  width paneWidth
+  float left
+  display inline-block
+  position relative
+  
+  .container
+    position absolute
+    left 0
+    top 0
+    padding 10px
+
+#{containerSelector}
+  animation movePane delay linear infinite
+  -moz-animation movePane delay linear infinite
+  -webkit-animation movePane delay linear infinite
+
+#{wrapperSelector} img
+  width 100%
+
+
+
+@media screen and (max-width: 399px)
+  .{paneSelector}
+    .container
+      font-size 10px
+
+@media screen and (max-width: 500px) and (min-width: 400px)
+  .{paneSelector}
+    .container
+      font-size 12px
+      
+@media screen and (max-width: 700px) and (min-width: 501px)
+  .{paneSelector}
+    .container
+      font-size 20px
+      
+@media screen and (min-width: 701px)
+  .{paneSelector}
+    .container
+      font-size 35px

@@ -1,0 +1,101 @@
+extends layout
+
+block content
+  h1 carousel creator:
+  
+  style= generatedCSSOutput
+  
+  !{generatedHTMLOutput}
+
+  p just input your various values, the html and css will be created below, a preview will appear above.
+
+  form(method="post")
+    p
+      label(for="wrapperSelector") insert wrapper css id:
+      input(type="text", name="wrapperSelector", value= body.wrapperSelector || "carouselWrapper")
+    p
+      label(for="containerSelector") insert container css id:
+      input(type="text", name="containerSelector", value= body.containerSelector || "carouselContainer")
+      
+    p
+      label(for="paneSelector") insert image pane css class:
+      input(type="text", name="paneSelector", value= body.paneSelector || 'pane')
+      
+    p 
+      label(for="height") insert total height:
+      input(type="number", name="height", value= body.height || "300")
+      
+      label(for="heightUnit") choose height unit:
+      select(name="heightUnit")
+          option(value="px", selected= body.heightUnit === "px") px
+          option(value="%", selected= body.heightUnit === "%") %
+          option(value="em", selected= body.heightUnit === "em") em
+    p
+      label(for="width") insert total width:
+      input(type="number", value= body.width || "500", name="width")
+      
+      label(for="widthUnit") choose width unit:
+      select(name="widthUnit")
+          option(value="px", selected= body.widthUnit === "px") px
+          option(value="%", selected= body.widthUnit === "%") %
+          option(value="em", selected= body.widthUnit === "em") em
+    
+    p
+      label(for="delay") time to take for the whole animation:
+    p
+      input(type="number", min="1", value= body.delay || "3", name="delay")
+      select(name="delayTimeType")
+        option(value='s') seconds
+        option(value='m') minutes
+    
+    p
+      label(for="moveDelay") time to take for the movement portion of the animation:
+      input(type='text', value= body.moveDelay || '1.5', name="moveDelay")
+    
+    p
+      label(for="numOfPanes") insert number of panes:
+    p
+      input(type="number", min="2", value= body.numOfPanes || "3", name="numOfPanes")
+    
+    p
+      label(for="imageBaseurl") image baseurl:
+    p
+      input(type="text", name="imageBaseurl", value= body.imageBaseurl || "/img/")
+      
+    p
+      label(for="imageUrls") image contents:
+    - for (var i = 0; i < body.numOfPanes; i++)
+      p
+        input(type="text", name="panels[" + i + "][title]", value= body.panels[i].title)
+      p
+        textarea(rows="7", name="panels[" + i + "][content]")!= body.panels[i].content
+      p
+        input(type="text", name="panels[" + i + "][imageSrc]", value= body.panels[i].imageSrc)
+        
+        div.preview
+          div.container
+            h1= body.panels[i].title
+            div!= body.panels[i].content
+          img(src= body.imageBaseurl + body.panels[i].imageSrc)
+
+    
+    p
+      input(type="submit", value="generate")
+      
+    p
+      p
+        label(for="jade") use jade html preprocessor:
+        input(type="checkbox", name="jade", checked= body.jade)
+      
+      if generatedHTML
+        textarea(cols="50", rows="10")= generatedHTML
+        
+        if body.jade
+          textarea(cols="50", rows="10")= generatedJSON
+      
+      p
+        label(for="stylus") use stylus css:
+        input(type="checkbox", name="stylus", checked= body.stylus)
+      
+      if generatedCSS
+        textarea(cols="50", rows="10")= generatedCSS
